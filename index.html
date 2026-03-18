@@ -19,6 +19,7 @@
                     <li><a href="#tnnews" class="nav-link">தமிழ்நாடு செய்திகள்</a></li>
                     <li><a href="#ai-assistant" class="nav-link">AI உதவியாளர்</a></li>
                     <li><a href="#newspapers" class="nav-link">தமிழ் செய்தித்தாள்கள்</a></li>
+                    <li><a href="#study-materials" class="nav-link">பாடநூல்கள்</a></li>
                     <li>
                         <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="டார்க் மோட்">
                             <span class="sun-icon">☀️</span>
@@ -58,6 +59,104 @@
                 </div>
             </div>
             <div class="hero-particles" id="hero-particles"></div>
+        </section>
+
+        <!-- பாடநூல்கள் பகுதி -->
+        <section id="study-materials" class="section">
+            <div class="container">
+                <h2>முழுமையான பாடநூல்கள்</h2>
+                <p>தேர்வு தயார்ப்புக்கு தேவையான அனைத்து பாடநூல்கள் மற்றும் ஆவணங்களும் இங்கே கிடைக்கின்றன</p>
+
+                <div class="study-materials-grid">
+                    <!-- syllabus பிரிவு -->
+                    <div class="study-section">
+                        <h3>🗂️ சிலபஸ் மற்றும் பாடத்திட்டங்கள்</h3>
+                        <div class="material-cards">
+                            <div class="material-card">
+                                <h4>TNPSC குரூப் 1 சிலபஸ்</h4>
+                                <p>முழுமையான பாடத்திட்டங்கள் மற்றும் போக்குவரத்து அட்டவணை</p>
+                                <a href="documents/tnpsc-group1-syllabus.pdf" target="_blank" class="download-btn">பதிவிறக்கம்</a>
+                            </div>
+                            <div class="material-card">
+                                <h4>TNPSC குரூப் 2 சிலபஸ்</h4>
+                                <p>போலீஸ் அதிகாரி மற்றும் ஆசிரியர் தேர்வு பாடங்கள்</p>
+                                <a href="documents/tnpsc-group2-syllabus.pdf" target="_blank" class="download-btn">பதிவிறக்கம்</a>
+                            </div>
+                            <div class="material-card">
+                                <h4>வங்கி தேர்வு சிலபஸ் (IBPS/SBI)</h4>
+                                <p>PO மற்றும் கிளார்க் தேர்வு பாடத்திட்டங்கள்</p>
+                                <a href="documents/banking-syllabus.pdf" target="_blank" class="download-btn">பதிவிறக்கம்</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- தியரி நோட்ஸ் பிரிவு -->
+                    <div class="study-section">
+                        <h3>📚 தியரி குறிப்புகள்</h3>
+                        <div class="material-cards">
+                            <div class="material-card">
+                                <h4>இந்திய வரலாறு மற்றும் அரசியல்</h4>
+                                <p>முழுமையான குறிப்புகள் மற்றும் முக்கிய தேதிகள்</p>
+                                <button onclick="loadStudyNotes('history')" class="read-btn">படித்தல்</button>
+                            </div>
+                            <div class="material-card">
+                                <h4>பொது அறிவு மற்றும் மன அறிவு</h4>
+                                <p>தற்போதைய நிகழ்வுகள் மற்றும் வழக்கமான கேள்விகள்</p>
+                                <button onclick="loadStudyNotes('gk')" class="read-btn">படித்தல்</button>
+                            </div>
+                            <div class="material-card">
+                                <h4>கணிதம் மற்றும் தருக்கவியல்</h4>
+                                <p>விளக்கங்களுடன் கூடிய பிரச்சனைகள்</p>
+                                <button onclick="loadStudyNotes('math')" class="read-btn">படித்தல்</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- முற்றிக்கு தேர்வு பிரிவு -->
+                    <div class="study-section">
+                        <h3>✍️ முற்றிக்கு தேர்வுகள்</h3>
+                        <div class="material-cards">
+                            <div class="material-card">
+                                <h4>TNPSC முற்றிக்கு தேர்வு (2025)</h4>
+                                <p>முழுமையான விளக்கங்களுடன் கூடிய தேர்வு கேள்விகள்</p>
+                                <button onclick="startMockTest('tnpsc')" class="test-btn">தேர்வு தொடங்கு</button>
+                            </div>
+                            <div class="material-card">
+                                <h4>வங்கி தேர்வு முற்றிக்கு (IBPS)</h4>
+                                <p>எண் சம்பந்தப்பட்ட மற்றும் நியாயமான தேர்வு கேள்விகள்</p>
+                                <button onclick="startMockTest('banking')" class="test-btn">தேர்வு தொடங்கு</button>
+                            </div>
+                            <div class="material-card">
+                                <h4>SBI PO முற்றிக்கு தேர்வு</h4>
+                                <p>வங்கி போட்டித் தேர்வு சிம்முலேஷன்</p>
+                                <button onclick="startMockTest('sbi-po')" class="test-btn">தேர்வு தொடங்கு</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ஆன்ஸ்வர் கீஸ் மற்றும் விளக்கங்கள் -->
+                    <div class="study-section">
+                        <h3>✅ ஆன்ஸ்வர் கீஸ் மற்றும் விளக்கங்கள்</h3>
+                        <div class="material-cards">
+                            <div class="material-card">
+                                <h4>தேர்வு 2024 - TNPSC குரூப் 1</h4>
+                                <p>விளக்கங்களுடன் கூடிய விடயங்கள் மற்றும் தீர்வுகள்</p>
+                                <button onclick="loadAnswerKey('tnpsc-2024')" class="key-btn">காண்</button>
+                            </div>
+                            <div class="material-card">
+                                <h4>IBPS PO 2024 பைனல் விடயம்</h4>
+                                <p>முழுமையான ஆன்ஸ்வர் கீ மற்றும் கணக்கிடல்</p>
+                                <button onclick="loadAnswerKey('ibps-po-2024')" class="key-btn">காண்</button>
+                            </div>
+                            <div class="material-card">
+                                <h4>SBI Clerk தேர்வு விளக்கங்கள்</h4>
+                                <p>கணினி அறிவு மற்றும் பொது அறிவு விடயங்கள்</p>
+                                <button onclick="loadAnswerKey('sbi-clerk-2024')" class="key-btn">காண்</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- AI உதவியாளர் பகுதி -->
@@ -222,5 +321,63 @@
     </footer>
 
     <script src="script.js"></script>
+
+    <!-- பாடநூல்கள் ஸ்டைலிங் -->
+    <style>
+        .answer-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .answer-table th, .answer-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .answer-table th {
+            background: var(--bg-secondary);
+            font-weight: 600;
+        }
+
+        .score-display {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .score {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: block;
+        }
+
+        .performance-feedback {
+            text-align: center;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .test-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .formula {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: monospace;
+            margin: 1rem 0;
+        }
+    </style>
 </body>
 </html>

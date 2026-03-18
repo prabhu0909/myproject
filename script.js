@@ -1,5 +1,85 @@
 // தேர்வு தயார்ப்பு வலைத்தளத்தின் ஜாவாஸ்கிரிப்ட் கோப்பு
 
+// டார்க் மோட் டோக்கிள் செயல்பாடு
+function toggleDarkMode() {
+    const body = document.body;
+    const toggleBtn = document.querySelector('.dark-mode-toggle');
+
+    if (body.classList.contains('dark-mode')) {
+        body.classList.remove('dark-mode');
+        localStorage.setItem('darkMode', 'false');
+        toggleBtn.setAttribute('title', 'டார்க் மோட்');
+    } else {
+        body.classList.add('dark-mode');
+        localStorage.setItem('darkMode', 'true');
+        toggleBtn.setAttribute('title', 'லைட் மோட்');
+    }
+}
+
+// ஏற்றப்படும்போது டார்க் மோட் அமைப்பை ஏற்றுதல்
+function loadDarkModePreference() {
+    const darkMode = localStorage.getItem('darkMode');
+    if (darkMode === 'true') {
+        document.body.classList.add('dark-mode');
+    }
+}
+
+// Quick question அனுப்புதல்
+function askQuickQuestion(question) {
+    const chatMessages = document.getElementById('chat-messages');
+    const userMessage = document.createElement('div');
+    userMessage.className = 'message user-message';
+    userMessage.innerHTML = `
+        <div class="message-content">
+            <strong>நீங்கள்:</strong> ${question}
+        </div>
+    `;
+    chatMessages.appendChild(userMessage);
+
+    // AI பதிலை சிமுலேட் செய்தல் (இங்கே உண்மையான API ஒருங்கிணைப்பு)
+    const aiResponse = getAIResponse(question);
+    setTimeout(() => {
+        const aiMessage = document.createElement('div');
+        aiMessage.className = 'message bot-message';
+        aiMessage.innerHTML = `
+            <div class="message-content">
+                <strong>AI உதவியாளர்:</strong> ${aiResponse}
+            </div>
+        `;
+        chatMessages.appendChild(aiMessage);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }, 1000);
+}
+
+// AI பதில்களை பெறுதல் (சிமுலேட் செய்யப்பட்ட)
+function getAIResponse(question) {
+    const responses = {
+        "TNPSC குரூப் 1 தேர்வின் பாடங்கள் என்ன?": "TNPSC குரூப் 1 தேர்வில் பொது அறிவு மற்றும் மன அறிவு, தமிழ் வழுவியல் மற்றும் இலக்கியம், கணிதம் மற்றும் தருக்கவியல், இந்திய வரலாறு மற்றும் அரசியல் போன்ற பாடங்கள் அடங்கும். சில பங்களிப்போல் செய்ய சிஸ்டம் செய்யப்படுகிறது.",
+        "IBPS PO தேர்வில் எத்தனை பிரிவுகள் இருக்கும்?": "IBPS PO தேர்வில் பொதுவான பாடங்கள் (Reasoning & Computer Aptitude), ஆங்கிலம், கணிதம் (Quantitative Aptitude), பொது அறிவு (General Awareness) மற்றும் தேர்ந்தெடுக்கப்பட்ட ஆய்வுத்தாள் (Professional Knowledge) என 5 பிரிவுகள் இருக்கும்.",
+        "வங்கி தேர்வுக்கு எப்படி தயார்படுவது?": "வங்கி தேர்வுக்கு தயார்ப்பது சொல்லது: அன்றாடம் செய்திகளை படித்தல், பழைய தேர்வுகளை தீர்த்தல், வளைய தொடங்குதல், முழுமையான கணினி அறிவு கொள்ளல். நீங்கள் தேர்வு எடுத்தால் அதைப் பற்றிய குறிப்பிட்ட வழிகாட்டலை அளிக்கிறேன்!"
+    };
+
+    return responses[question] || "மன்னிக்கவும், உங்கள் கேள்விக்கு உடனான பதிலளிக்க அது உங்கள் கேள்வியில் தொடர்புடையது. என் சிஸ்டம் Hugging Face API ஐ பயன்படுத்துகிறது, அதனால் சில கேள்விகளுக்கு பதிலளிக்க இயலாமல் இருக்கலாம். மறுபடியும் முயற்சிக்கவும்.";
+}
+
+// செய்தி அனுப்புதல்
+function sendMessage() {
+    const userInput = document.getElementById('user-input');
+    const message = userInput.value.trim();
+
+    if (message === '') return;
+
+    askQuickQuestion(message);
+    userInput.value = '';
+}
+
+// Enter key அழுத்தம்
+function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+        sendMessage();
+    }
+}
+
 // தினசரி செய்திகளை ஏற்றுதல்
 async function loadDailyNews() {
     const newsContainer = document.getElementById('daily-news');
@@ -317,11 +397,306 @@ function getWeekFromNow() {
     });
 }
 
-// பக்கம் ஏற்றப்படும்போது செய்திகளை தானாக ஏற்றுதல்
+// பக்கம் ஏற்றப்படும்போது செய்திகளை தானாக ஏற்றுதல் மற்றும் வேறு செயல்பாடுகள்
 document.addEventListener('DOMContentLoaded', function() {
+    // டார்க் மோட் விருப்பங்களை ஏற்றுதல்
+    loadDarkModePreference();
+
     // தேர்வு தயார்ப்பு உள்ளடக்கத்தை சேர்த்தல்
     addExamPreparationContent();
+
+    // அனிமேஷன் கிளாஸ்களை சேர்த்தல்
+    addFadeInAnimation();
 });
+
+// பக்கம் ஸ்க்ரால்லு செய்யப்படும்போது அனிமேஷான் சேர்த்தல்
+function addFadeInAnimation() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in-up');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.section, .exam-card, .news-card, .tn-news-card, .newspaper-card').forEach(el => {
+        observer.observe(el);
+    });
+}
+
+// ஹீரோ பார்டிக்கள் அனிமேஷன் சேர்த்தல்
+function initHeroParticles() {
+    const particlesContainer = document.getElementById('hero-particles');
+    if (!particlesContainer) return;
+
+    for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 3 + 's';
+        particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        particlesContainer.appendChild(particle);
+    }
+}
+// ஹீரோ பார்டிக்கள் அனிமேஷன் சேர்த்தல் நிஜமாக்கு
+setTimeout(initHeroParticles, 1000);
+
+// பாடநூல்கள் செயல்பாடுகள்
+
+// படிப்பு நோட்ஸ் ஏற்றுதல்
+function loadStudyNotes(subject) {
+    // இங்கே மாட்டல்டிடி பிரவுஸர் ஸ்டோ ரஜ மூடாக்கும்
+    const notes = {
+        history: {
+            title: "இந்திய வரலாறு மற்றும் அரசியல்",
+            content: `
+                <h3>இந்திய வரலாறு - முக்கிய பிரிவுகள்</h3>
+                <h4>பழைய கற்கைக்காலம் (அசோகர் காலம்)</h4>
+                <ul>
+                    <li>மௌரிய சாம்ராஜ்யம் - அசோகர்</li>
+                    <li>புத்த மத காலம்</li>
+                    <li>கல் மற்றும் செப்பு எழுத்துக்கள்</li>
+                </ul>
+                <h4>பழைய பழமையான வரலாறு</h4>
+                <ul>
+                    <li>குப்தர் சாம்ராஜ்யம்</li>
+                    <li>தங்க காலம்</li>
+                    <li>கலாச்சார மேம்பாடு</li>
+                </ul>
+                <h4>வழிங்கு காலம்</h4>
+                <ul>
+                    <li>தெலுங்கு சாம்ராஜ்யங்கள்</li>
+                    <li>முகலாயர் ஆட்சி</li>
+                    <li>மராட்டியர் போர்</li>
+                </ul>
+            `
+        },
+        gk: {
+            title: "பொது அறிவு மற்றும் மன அறிவு",
+            content: `
+                <h3>தற்போதைய நிகழ்வுகள்</h3>
+                <h4>தமிழ்நாடு பட்ஜெட் 2024-25</h4>
+                <ul>
+                    <li>மொத்த வருமானம்: ₹2.2 லட்சம் கோடி</li>
+                    <li>விவசாய மானியம்: ₹5000 கோடி</li>
+                    <li>கல்வி ஒதுக்கீடு: ₹25,000 கோடி</li>
+                </ul>
+                <h4>இந்திய அரசியல்</h4>
+                <ul>
+                    <li>பிரதமர்: நரேந்திர மோடி</li>
+                    <li>முதலமைச்சர் (தமிழ்நாடு): மு.க. ஸ்டாலின்</li>
+                    <li>கவர்னர்: ஆர்.என். ரவி</li>
+                </ul>
+                <h4>உலக நிகழ்வுகள்</h4>
+                <ul>
+                    <li>ரஷ்யா-யுக்ரைன் போர் (2022-தொடர்கிறது)</li>
+                    <li>இஸ்ரேல்-ஹமாஸ் மோதல்</li>
+                    <li>ஜி20 உச்சி: பிரேமினார், தென்கொரியா</li>
+                </ul>
+            `
+        },
+        math: {
+            title: "கணிதம் மற்றும் தருக்கவியல்",
+            content: `
+                <h3>கணித ஆர்டித்தது பிரச்சனைகள்</h3>
+                <h4>சராசரி கணக்கிடல்</h4>
+                <p>ஒரு மனிதன் ஒரு நாளில் 25 கி.மீ சென்று 30 கி.மீ திரும்பிச் செல்கிறான். அவனின் சராசரி விரைவு என்ன?</p>
+                <p><strong>விடை:</strong> முன் பின் விரைவுகளை பெருக்கி இரண்டாக பிரித்தல்</p>
+                <p>உதாரணம்: (25 × 30) ÷ (25 + 30) = 750 ÷ 55 ≈ 13.6 கி.மீ</p>
+
+                <h4>வட்டி கணக்கிடல்</h4>
+                <div class="formula">
+                    சிம்பிள் இன்ட்ரெஸ்ட் = (P × R × T) ÷ 100<br>
+                    கம்பவுண்ட் இன்ட்ரெஸ்ட் = P(1 + r/100)^n
+                </div>
+
+                <h4>தருக்கவியல் - பிரச்சனைகள்</h4>
+                <h5>பிளஸ் மைனஸ் தருக்கவியல்</h5>
+                <p>வழக்கமான தருக்கவியல் பாதைகள்: எப்பொழுதும் ஆரம்பிக்காது, ஒரு முறை மட்டுமே மீண்டும் சந்தித்தல் போன்றவை.</p>
+            `
+        }
+    };
+
+    showModal(notes[subject].content, notes[subject].title);
+}
+
+// முற்றிக்கு தேர்வு தொடங்குதல்
+function startMockTest(testType) {
+    const tests = {
+        tnpsc: {
+            title: "TNPSC குரூப் 1 முற்றிக்கு தேர்வு",
+            questions: [
+                {
+                    question: "தமிழ்நாட்டின் தலைநகரம் எது?",
+                    options: ["மதராஸ்", "சென்னை", "மைசூர்", "பங்களூரு"],
+                    correct: 1
+                },
+                {
+                    question: "மக்கள் கணக்கெடுப்பு எத்தனை ஆண்டுக்கு ஒருமுறை?",
+                    options: ["5 ஆண்டு", "10 ஆண்டு", "15 ஆண்டு", "20 ஆண்டு"],
+                    correct: 1
+                },
+                {
+                    question: "அசோகர் காலத்தில் எழுதப்பட்ட புத்த எழுத்து எது?",
+                    options: ["கல் எழுத்து", "செப்பு எழுத்து", "பொன் எழுத்து", "வெள்ளி எழுத்து"],
+                    options: ["கல் எழுத்து", "செப்பு எழுத்து", "பொன் எழுத்து", "வெள்ளி எழுத்து"],
+                    correct: 0
+                }
+            ]
+        },
+        banking: {
+            title: "IBPS PO முற்றிக்கு தேர்வு",
+            questions: [
+                {
+                    question: "RBI என்றால் என்ன?",
+                    options: ["Reserve Bank of India", "Royal Bank of India", "Regional Bank of India", "Rural Bank of India"],
+                    correct: 0
+                },
+                {
+                    question: "பாங்கிங் டெர்மினாலஜி - CRR என்றால் என்ன?",
+                    options: ["Cash Reserve Ratio", "Capital Reserve Ratio", "Credit Reserve Ratio", "Current Reserve Ratio"],
+                    correct: 0
+                }
+            ]
+        }
+    };
+
+    const test = tests[testType];
+    let testHTML = `<h3>${test.title}</h3><form id="mock-test-form">`;
+
+    test.questions.forEach((q, index) => {
+        testHTML += `
+            <div class="test-question">
+                <p><strong>கேள்வி ${index + 1}:</strong> ${q.question}</p>
+                <div class="test-options">
+                    ${q.options.map((option, optIndex) =>
+                        `<div class="test-option" data-question="${index}" data-answer="${optIndex}">${option}</div>`
+                    ).join('')}
+                </div>
+            </div>
+        `;
+    });
+
+    testHTML += '<button type="submit" class="test-submit-btn">விடயத்தை சமர்ப்பிக்கு</button></form>';
+    showModal(testHTML, test.title);
+
+    // ஃபார்ம் சமர்ப்பித்தல் கையாளுதல்
+    document.getElementById('mock-test-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        evaluateTest(test.questions);
+    });
+}
+
+// தேர்வு மதிப்பீடு செய்தல்
+function evaluateTest(questions) {
+    const selectedAnswers = document.querySelectorAll('.test-option.selected');
+    let correct = 0;
+
+    selectedAnswers.forEach(option => {
+        const questionIndex = parseInt(option.dataset.question);
+        const answerIndex = parseInt(option.dataset.answer);
+        if (answerIndex === questions[questionIndex].correct) {
+            correct++;
+        }
+    });
+
+    const score = (correct / questions.length) * 100;
+    showResults(score, questions.length);
+}
+
+// தேர்வு முடிவுகள் காட்டுதல்
+function showResults(score, total) {
+    const resultsHTML = `
+        <div class="test-results">
+            <h3>தேர்வு முடிவுகள்</h3>
+            <div class="score-display">
+                <div class="score">${Math.round(score)}%</div>
+                <p>${Math.round(score)/100 * total}/${total} கேள்விகளுக்கு சரியாக விடயம்</p>
+            </div>
+            <div class="performance-feedback">
+                ${score >= 80 ? 'சிறப்பாக செய்துள்ளீர்கள்! 🎉' :
+                  score >= 60 ? 'நலமாக செய்துள்ளீர்கள்! 👍' :
+                  'மேலும் பயிற்சி தேவை! 📚'}
+            </div>
+            <button onclick="initiateRetake()" class="test-btn">மீண்டும் தேர்வு</button>
+        </div>
+    `;
+    showModal(resultsHTML, 'தேர்வு முடிவுகள்');
+}
+
+// ஆன்ஸ்வர் கீ ஏற்றுதல்
+function loadAnswerKey(testType) {
+    const answers = {
+        'tnpsc-2024': {
+            title: 'TNPSC குரூப் 1 தேர்வு - 2024',
+            content: `
+                <h4>குரூப் 1 தேர்வு விடயங்கள்</h4>
+                <table class="answer-table">
+                    <tr><th>கேள்வி எண்</th><th>சரியான விடை</th><th>விளக்கம்</th></tr>
+                    <tr><td>1</td><td>A</td><td>தமிழ்நாட்டின் தலைநகரம் சென்னை</td></tr>
+                    <tr><td>2</td><td>B</td><td>மக்கள் கணக்கெடுப்பு 10 ஆண்டுக்கு ஒருமுறை</td></tr>
+                    <tr><td>3</td><td>A</td><td>அசோகர் கல் எழுத்துக்கள் செய்தார்</td></tr>
+                </table>
+            `
+        },
+        'ibps-po-2024': {
+            title: 'IBPS PO தேர்வு - 2024',
+            content: `
+                <h4>பைனல் தேர்வு விடயங்கள்</h4>
+                <table class="answer-table">
+                    <tr><th>கேள்வி எண்</th><th>சரியான விடை</th><th>விளக்கம்</th></tr>
+                    <tr><td>1</td><td>C</td><td>RBI ரிஸர்வ் பாங்க் ஆஃப் இந்தியா</td></tr>
+                    <tr><td>2</td><td>A</td><td>CRR - கேஷ் ரிஸர்வ் ரேஷியோ</td></tr>
+                </table>
+            `
+        }
+    };
+
+    showModal(answers[testType].content, answers[testType].title);
+}
+
+// ஆனிமேட் மாட்டல் காட்டுதல்
+function showModal(content, title) {
+    const modal = document.createElement('div');
+    modal.className = 'test-modal active';
+    modal.innerHTML = `
+        <div class="test-modal-content">
+            <button class="test-modal-close" onclick="this.closest('.test-modal').remove()">×</button>
+            <h3>${title}</h3>
+            <div class="modal-body">${content}</div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    // மாட்டல்டிர ஸ்க்ரிப்ட் ஏற்றுதல்
+    setTimeout(() => {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.remove();
+            }
+        });
+    }, 100);
+}
+
+/* மாட்டல் சிஸ்டம் */
+
+// நோட்டிஃபிகேஷன் காட்டுதல்
+function showNotification(message, type = 'success') {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
 
 // தேர்வு தயார்ப்பு உள்ளடக்கத்தை சேர்த்தல்
 function addExamPreparationContent() {
