@@ -1,571 +1,68 @@
-@charset "UTF-8";
-
-/* தமிழ் எழுத்துரு மற்றும் பொது அமைப்புகள் */
-:root {
-  --primary-color: #2563eb;
-  --secondary-color: #1d4ed8;
-  --accent-color: #f59e0b;
-  --success-color: #10b981;
-  --warning-color: #f59e0b;
-  --danger-color: #ef4444;
-  --text-color: #1f2937;
-  --text-light: #6b7280;
-  --bg-color: #ffffff;
-  --bg-secondary: #f8fafc;
-  --card-bg: #ffffff;
-  --border-color: #e5e7eb;
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-  --tamil-font: 'Noto Sans Tamil', sans-serif;
-  --heading-font: 'Noto Sans Tamil', Serif;
-
-  /* மாற்றம் எண்ணங்கள் */
-  --transition-fast: all 0.2s ease;
-  --transition-normal: all 0.3s ease;
-  --transition-slow: all 0.5s ease;
-}
-
-/* டார்க் மோட் CSS Variables */
-.dark-mode {
-  --primary-color: #3b82f6;
-  --secondary-color: #1d4ed8;
-  --accent-color: #fbbf24;
-  --text-color: #f9fafb;
-  --text-light: #d1d5db;
-  --bg-color: #111827;
-  --bg-secondary: #1f2937;
-  --card-bg: #1f2937;
-  --border-color: #374151;
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: var(--tamil-font);
-  line-height: 1.6;
-  color: var(--text-color);
-  background-color: var(--bg-color);
-  direction: ltr;
-  text-align: left;
-}
-
-/* தலைப்பு அமைப்பு - நவீனமாக்கல் */
-header {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  color: white;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.2);
-  transition: var(--transition-normal);
-}
-
-.nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1rem 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.logo {
-  font-size: 1.8rem;
-  font-weight: 700;
-  font-family: var(--heading-font);
-  background: linear-gradient(135deg, #fff, #e0f2fe);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: fadeInUp 0.8s ease-out;
-  cursor: pointer;
-  transition: var(--transition-fast);
-}
-
-.logo:hover {
-  transform: scale(1.05);
-  animation: bounce 0.6s ease-in-out;
-}
-
-.nav-menu {
-  display: flex;
-  list-style: none;
+/* Hero Stats */
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 2rem;
-  align-items: center;
+  margin-top: 3rem;
 }
 
-.nav-link {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  transition: var(--transition-fast);
-  padding: 0.75rem 1rem;
-  border-radius: 8px;
-  position: relative;
-  overflow: hidden;
-  display: block;
-}
-
-.nav-link::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.5s ease;
-}
-
-.nav-link:hover::before {
-  left: 100%;
-}
-
-.nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-
-/* டார்க் மோட் டோக்கிள் */
-.dark-mode-toggle {
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  border-radius: 50%;
-  width: 45px;
-  height: 45px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  transition: var(--transition-fast);
-  backdrop-filter: blur(10px);
-  position: relative;
-  overflow: hidden;
-}
-
-.dark-mode-toggle:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.1);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-}
-
-.dark-mode-toggle .sun-icon,
-.dark-mode-toggle .moon-icon {
-  transition: var(--transition-fast);
-  position: absolute;
-}
-
-.dark-mode .sun-icon {
-  opacity: 0;
-  transform: rotate(180deg);
-}
-
-.dark-mode .moon-icon {
-  opacity: 1;
-  transform: rotate(0deg);
-}
-
-.sun-icon {
-  opacity: 1;
-  transform: rotate(0deg);
-}
-
-.moon-icon {
-  opacity: 0;
-  transform: rotate(-180deg);
-}
-
-/* பிரதான பகுதி */
-.hero {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  color: white;
-  padding: 4rem 0;
+.stat-item {
   text-align: center;
+  color: white;
 }
 
-.hero-content h2 {
+.stat-number {
   font-size: 2.5rem;
-  margin-bottom: 1rem;
-  font-family: var(--heading-font);
   font-weight: 700;
-}
-
-.hero-content p {
-  font-size: 1.2rem;
   margin-bottom: 0.5rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
-/* பொது பகுதி அமைப்புகள் */
-.section {
-  padding: 4rem 0;
+.stat-label {
+  font-size: 1rem;
+  opacity: 0.9;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+/* CTA Buttons */
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
 }
 
-section h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  text-align: center;
-  color: var(--primary-color);
-  font-family: var(--heading-font);
-  font-weight: 600;
-}
-
-/* தேர்வு கார்டுகள் */
-.exam-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
-
-.exam-card, .news-card, .tn-news-card, .newspaper-card {
-  background: var(--card-bg);
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid var(--border-color);
-}
-
-.exam-card:hover, .news-card:hover, .tn-news-card:hover, .newspaper-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0,0,0,0.15);
-}
-
-.exam-card h3, .news-card h3, .tn-news-card h3, .newspaper-card h3 {
-  color: var(--primary-color);
-  margin-bottom: 1rem;
-  font-size: 1.4rem;
-  font-weight: 600;
-  font-family: var(--heading-font);
-}
-
-.exam-card p {
-  color: var(--text-color);
-  margin-bottom: 1rem;
-  line-height: 1.6;
-}
-
-/* செய்தி பட்டை அமைப்பு */
-.news-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 2rem;
-}
-
-.news-content {
-  margin: 1rem 0;
-  min-height: 200px;
-  line-height: 1.7;
-}
-
-.btn-refresh {
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
+.cta-button {
+  padding: 1rem 2rem;
   border-radius: 8px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.3s ease;
-  font-family: var(--tamil-font);
-}
-
-.btn-refresh:hover {
-  background-color: var(--secondary-color);
-}
-
-.newspaper-link {
-  display: inline-block;
-  background-color: var(--accent-color);
-  color: var(--text-color);
   text-decoration: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
-  font-weight: 500;
-  margin-bottom: 1rem;
-}
-
-.newspaper-link:hover {
-  background-color: #d97706;
-}
-
-.hidden {
-  display: none;
-}
-
-/* தமிழ்நாடு செய்திகள் */
-.tn-news-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-  gap: 2rem;
-}
-
-/* செய்தித்தாள் பட்டை */
-.newspaper-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-}
-
-/* அடிப்புறம் */
-footer {
-  background-color: var(--text-color);
-  color: white;
-  padding: 2rem 0;
-  text-align: center;
-  margin-top: 4rem;
-}
-
-footer p {
-  margin-bottom: 0.5rem;
-  font-size: 0.9rem;
-}
-
-/* ஏற்றுதல் உணர்தல் */
-.loading {
-  text-align: center;
-  color: #6b7280;
-  font-style: italic;
-}
-
-.error {
-  background-color: #fef2f2;
-  border: 1px solid #fca5a5;
-  color: #dc2626;
-  padding: 1rem;
-  border-radius: 8px;
-  margin: 1rem 0;
-}
-
-/* பதிலமைப்பு வடிவமைப்பு */
-@media (max-width: 768px) {
-  .nav-container {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .nav-menu {
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
-  }
-
-  header h1 {
-    font-size: 1.5rem;
-  }
-
-  .hero-content h2 {
-    font-size: 2rem;
-  }
-
-  .hero-content p {
-    font-size: 1rem;
-  }
-
-  section h2 {
-    font-size: 1.6rem;
-  }
-
-  .exam-grid, .news-grid, .tn-news-container, .newspaper-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .exam-card, .news-card, .tn-news-card, .newspaper-card {
-    padding: 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    padding: 0 15px;
-  }
-
-  .section {
-    padding: 2rem 0;
-  }
-
-  .hero {
-    padding: 2rem 0;
-  }
-
-  .hero-content h2 {
-    font-size: 1.8rem;
-  }
-
-  .exam-card, .news-card, .tn-news-card, .newspaper-card {
-    padding: 1rem;
-  }
-}
-
-/* தமிழ் மொழி குறிப்பிட்ட தனிப்பட்டங்கள் */
-:lang(ta) {
-  font-feature-settings: "liga" 1, "kern" 1;
-}
-
-/* அனிமேஷான்ஸ் */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-10px);
-  }
-  60% {
-    transform: translateY(-5px);
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-@keyframes particle-float {
-  0% {
-    transform: translateY(0px) translateX(0px) rotate(0deg);
-    opacity: 1;
-  }
-  50% {
-    transform: translateY(-100px) translateX(10px) rotate(180deg);
-    opacity: 0.5;
-  }
-  100% {
-    transform: translateY(-200px) translateX(-10px) rotate(360deg);
-    opacity: 0;
-  }
-}
-
-/* ஹீரோ பார்டிக்கள் */
-.hero-particles {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.particle {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: linear-gradient(45deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
-  border-radius: 50%;
-  animation: particle-float linear infinite;
-  top: 100%;
-}
-
-.particle:nth-child(3n) {
-  width: 6px;
-  height: 6px;
-  animation-duration: 4s;
-}
-
-.particle:nth-child(5n) {
-  width: 2px;
-  height: 2px;
-  animation-duration: 6s;
-}
-
-/* பெய-load மற்றும் பாலிஷிழுதல் அனிமேஷான்ஸ் */
-.fade-in-up {
-  animation: fadeInUp 0.6s ease-out;
-}
-
-/* கார்ட் அனிமேஷான்ஸ் */
-@keyframes card-lift {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.02);
-  }
-}
-
-.exam-card:hover, .news-card:hover, .tn-news-card:hover, .newspaper-card:hover {
-  animation: card-lift 0.3s ease-in-out;
-}
-
-/* லோடிங் ஸ்பின்னர் */
-.spinner {
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
   display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 3px solid rgba(255,255,255,0.3);
-  border-radius: 50%;
-  border-top-color: #fff;
-  animation: spin 1s ease-in-out infinite;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
+.cta-button.primary {
+  background: white;
+  color: var(--primary-color);
 }
 
-/* நோட்டிஃபிகேஷன் அனிமேஷான்ஸ் */
-@keyframes slideInFromRight {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
+.cta-button.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
-.notification {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: var(--success-color);
+.cta-button.secondary {
+  background: rgba(255,255,255,0.2);
   color: white;
-  padding: 1rem;
-  border-radius: 8px;
-  animation: slideInFromRight 0.5s ease-out;
-  z-index: 1000;
+  border: 2px solid white;
 }
 
-/* பாடநூல்கள் ச்டைலிங் */
-.study-materials-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 2rem;
+.cta-button.secondary:hover {
+  background: rgba(255,255,255,0.3);
 }
 
-.study-section {
+/* AI Chat Styling */
+.ai-chat-container {
   background: var(--card-bg);
   border-radius: 12px;
   padding: 2rem;
@@ -573,215 +70,167 @@ footer p {
   border: 1px solid var(--border-color);
 }
 
-.study-section h3 {
-  color: var(--primary-color);
-  margin-bottom: 1.5rem;
-  font-size: 1.3rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.material-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1rem;
-}
-
-.material-card {
+.chat-window {
   background: var(--bg-secondary);
   border-radius: 8px;
   padding: 1.5rem;
-  border: 1px solid var(--border-color);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.material-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-  transition: left 0.5s ease;
-}
-
-.material-card:hover::before {
-  left: 0;
-}
-
-.material-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-}
-
-.material-card h4 {
-  color: var(--text-color);
-  margin-bottom: 0.5rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-}
-
-.material-card p {
-  color: var(--text-light);
-  font-size: 0.9rem;
+  height: 400px;
+  overflow-y: auto;
   margin-bottom: 1rem;
-  line-height: 1.5;
 }
 
-.download-btn, .read-btn, .test-btn, .key-btn {
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.message {
+  padding: 1rem;
+  border-radius: 8px;
+  max-width: 80%;
+}
+
+.message.user-message {
+  align-self: flex-end;
+  background: var(--primary-color);
+  color: white;
+}
+
+.message.bot-message {
+  align-self: flex-start;
+  background: white;
+  border: 1px solid var(--border-color);
+}
+
+.message-content {
+  word-wrap: break-word;
+}
+
+.quick-questions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.quick-questions button {
+  padding: 0.75rem 1rem;
   background: var(--primary-color);
   color: white;
   border: none;
-  padding: 0.75rem 1.5rem;
   border-radius: 6px;
   cursor: pointer;
   font-weight: 500;
   font-family: var(--tamil-font);
   transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-  width: 100%;
 }
 
-.download-btn:hover, .read-btn:hover, .test-btn:hover, .key-btn:hover {
+.quick-questions button:hover {
   background: var(--secondary-color);
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
 }
 
-.read-btn {
-  background: var(--accent-color);
-}
-
-.read-btn:hover {
-  background: #d97706;
-}
-
-.test-btn {
-  background: var(--success-color);
-}
-
-.test-btn:hover {
-  background: #059669;
-}
-
-.key-btn {
-  background: var(--warning-color);
-}
-
-.key-btn:hover {
-  background: #d97706;
-}
-
-/* டெஸ்ட் மாட்டல் ஸ்டைலிங் */
-.test-modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.8);
-  z-index: 2000;
-  animation: fadeIn 0.3s ease;
-}
-
-.test-modal.active {
+.chat-input-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 1rem;
 }
 
-.test-modal-content {
-  background: var(--card-bg);
-  border-radius: 12px;
-  padding: 2rem;
-  max-width: 600px;
-  width: 90%;
-  max-height: 80vh;
-  overflow-y: auto;
-  position: relative;
-  animation: scaleIn 0.3s ease;
+.chat-input-container input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-family: var(--tamil-font);
+  font-size: 1rem;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes scaleIn {
-  from { transform: scale(0.9); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-.test-modal-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: none;
+.send-btn {
+  padding: 0.75rem 1.5rem;
+  background: var(--primary-color);
+  color: white;
   border: none;
-  font-size: 1.5rem;
+  border-radius: 6px;
   cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.send-btn:hover {
+  background: var(--secondary-color);
+}
+
+.ai-info {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+/* News Items */
+.news-item {
+  padding: 1rem;
+  border-left: 4px solid var(--primary-color);
+  background: var(--bg-secondary);
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.news-date {
+  color: var(--text-light);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.category {
+  display: inline-block;
+  background: var(--accent-color);
+  color: var(--text-color);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.location {
+  display: inline-block;
+  background: var(--primary-color);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Events */
+.event-item {
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border-radius: 6px;
+  border-left: 4px solid var(--success-color);
+  margin-bottom: 1rem;
+}
+
+.event-date {
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.event-description {
   color: var(--text-color);
 }
 
-.test-question {
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  background: var(--bg-secondary);
-  border-radius: 8px;
-  border-left: 4px solid var(--primary-color);
-}
-
-.test-options {
-  display: grid;
-  gap: 0.5rem;
-  margin: 0.5rem 0;
-}
-
-.test-option {
-  padding: 0.5rem;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.test-option:hover {
+/* Test Options */
+.test-option.selected {
   background: var(--primary-color);
   color: white;
+  border-color: var(--primary-color);
 }
 
-.test-submit-btn {
-  background: var(--success-color);
-  color: white;
-  border: none;
-  padding: 0.75rem 2rem;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 500;
-  margin-top: 1rem;
-}
-
-/* உருள் பட்டை அமைப்பு */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--card-bg);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--border-color);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-color);
+/* Modal Body */
+.modal-body {
+  max-height: 60vh;
+  overflow-y: auto;
+  margin: 1rem 0;
 }
