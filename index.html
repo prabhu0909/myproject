@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>தேர்வு தயார்ப்பு வலைத்தளம் - TNPSC & வங்கி தேர்வுகள்</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <div class="logo">தேர்வு தயார்ப்பு</div>
+                <ul class="nav-menu">
+                    <li><a href="#tnpsc" class="nav-link">TNPSC தேர்வு</a></li>
+                    <li><a href="#banking" class="nav-link">வங்கி தேர்வு</a></li>
+                    <li><a href="#news" class="nav-link">தினசரி செய்திகள்</a></li>
+                    <li><a href="#tnnews" class="nav-link">தமிழ்நாடு செய்திகள்</a></li>
+                    <li><a href="#ai-assistant" class="nav-link">AI உதவியாளர்</a></li>
+                    <li><a href="#newspapers" class="nav-link">தமிழ் செய்தித்தாள்கள்</a></li>
+                    <li>
+                        <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="டார்க் மோட்">
+                            <span class="sun-icon">☀️</span>
+                            <span class="moon-icon">🌙</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content fade-in-up">
+                    <h2 class="hero-title">தேர்வு தயார்ப்பு வலைத்தளம் வரவேற்கிறது</h2>
+                    <p class="hero-subtitle">TNPSC மற்றும் வங்கி தேர்வுகளுக்கான முழுமையான தயார்ப்பு வழிகாட்டி</p>
+                    <p class="hero-description">தினசரி செய்திகள், தமிழ்நாடு புதுப்பிப்புகள் மற்றும் AI உதவியாளருடன் உங்கள் தேர்வு தயார்ப்பில் வெற்றிபெறுங்கள்</p>
+                    <div class="hero-buttons">
+                        <a href="#ai-assistant" class="cta-button primary">AI உதவியாளரை சோதிக்க</a>
+                        <a href="#tnpsc" class="cta-button secondary">தயார்ப்பு தொடங்கு</a>
+                    </div>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">10,000+</div>
+                        <div class="stat-label">மாணவர்கள்</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">வெற்றி கதைகள்</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">AI ஆதரவு</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-particles" id="hero-particles"></div>
+        </section>
+
+        <!-- AI உதவியாளர் பகுதி -->
+        <section id="ai-assistant" class="section">
+            <div class="container">
+                <h2>AI தேர்வு உதவியாளர்</h2>
+                <p>உங்கள் தேர்வுக்கான கேள்விகளுக்கு 24/7 AI உதவி பெறுங்கள்</p>
+                <div class="ai-chat-container">
+                    <div class="chat-window" id="chat-window">
+                        <div class="chat-messages" id="chat-messages">
+                            <div class="message bot-message">
+                                <div class="message-content">
+                                    <strong>AI உதவியாளர்:</strong> வணக்கம்! நான் உங்கள் TNPSC மற்றும் வங்கி தேர்வு தயார்ப்பிற்கு உதவுவேன். தேர்வு தொடர்பான எந்த கேள்வியும் கேளுங்கள்!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="quick-questions">
+                            <button onclick="askQuickQuestion('TNPSC குரூப் 1 தேர்வின் பாடங்கள் என்ன?')">TNPSC குரூப் 1 பாடங்கள்?</button>
+                            <button onclick="askQuickQuestion('IBPS PO தேர்வில் எத்தனை பிரிவுகள் இருக்கும்?')">IBPS தேர்வு பிரிவுகள்?</button>
+                            <button onclick="askQuickQuestion('வங்கி தேர்வுக்கு எப்படி தயார்படுவது?')">தயார்ப்பு உதவிக்குறிப்புகள்</button>
+                        </div>
+                    </div>
+                    <div class="chat-input-container">
+                        <input type="text" id="user-input" placeholder="உங்கள் கேள்வியை இங்கே திண்ங்கள்..." onkeypress="handleKeyPress(event)">
+                        <button onclick="sendMessage()" class="send-btn">அனுப்பு</button>
+                    </div>
+                    <div class="ai-info">
+                        <small>குறிப்பு: இந்த AI உதவியாளர் இலவச Hugging Face API ஐ பயன்படுத்துகிறது. உங்கள் கேள்விகளுக்கு முடிந்தவரை உதவ முயற்சிப்போம்!</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tnpsc" class="section">
+            <div class="container">
+                <h2>TNPSC தேர்வு தயார்ப்பு</h2>
+                <div class="exam-grid">
+                    <div class="exam-card">
+                        <h3>குரூப் 1 தேர்வு</h3>
+                        <p>நிர்வாக அதிகாரி தேர்வு தயார்ப்பு</p>
+                        <div id="group1-content"></div>
+                    </div>
+                    <div class="exam-card">
+                        <h3>குரூப் 2 தேர்வு</h3>
+                        <p>போலீஸ் அதிகாரி மற்றும் ஆசிரியர் தேர்வு</p>
+                        <div id="group2-content"></div>
+                    </div>
+                    <div class="exam-card">
+                        <h3>தமிழ் நிறுவன தேர்வு</h3>
+                        <p>தமிழ் அறிவாற்றல் தேர்வு தயார்ப்பு</p>
+                        <div id="tn-content"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="banking" class="section">
+            <div class="container">
+                <h2>வங்கி தேர்வு தயார்ப்பு</h2>
+                <div class="exam-grid">
+                    <div class="exam-card">
+                        <h3>IBPS PO தேர்வு</h3>
+                        <p>ப்ராபபிள் ஆஃபிசர் தேர்வு</p>
+                        <div id="ibps-po-content"></div>
+                    </div>
+                    <div class="exam-card">
+                        <h3>IBPS Clerk தேர்வு</h3>
+                        <p>ஜூனியர் அசிஷ்டன்ட் தேர்வு</p>
+                        <div id="ibps-clerk-content"></div>
+                    </div>
+                    <div class="exam-card">
+                        <h3>SBI PO தேர்வு</h3>
+                        <p>ஸ்டேட் வங்கி ஆஃபிசர் தேர்வு</p>
+                        <div id="sbi-po-content"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="news" class="section">
+            <div class="container">
+                <h2>தினசரி செய்திகள் மற்றும் துப்புரவு</h2>
+                <div class="news-grid">
+                    <div class="news-card">
+                        <h3>தினசரி செய்திகள்</h3>
+                        <div id="daily-news" class="news-content">
+                            <p>செய்திகள் ஏற்றப்படுகின்றன...</p>
+                        </div>
+                        <button onclick="loadDailyNews()" class="btn-refresh">புதுப்பி</button>
+                    </div>
+                    <div class="news-card">
+                        <h3>துப்புரவு செய்திகள்</h3>
+                        <div id="current-affairs" class="news-content">
+                            <p>துப்புரவு செய்திகள் ஏற்றப்படுகின்றன...</p>
+                        </div>
+                        <button onclick="loadCurrentAffairs()" class="btn-refresh">புதுப்பி</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tnnews" class="section">
+            <div class="container">
+                <h2>தமிழ்நாடு செய்திகள்</h2>
+                <div class="tn-news-container">
+                    <div class="tn-news-card">
+                        <h3>தமிழ்நாடு தினசரி புதுப்பிப்புகள்</h3>
+                        <div id="tn-daily-updates" class="news-content">
+                            <p>தமிழ்நாடு செய்திகள் ஏற்றப்படுகின்றன...</p>
+                        </div>
+                        <button onclick="loadTamilNaduNews()" class="btn-refresh">புதுப்பி</button>
+                    </div>
+                    <div class="tn-news-card">
+                        <h3>தமிழ்நாடு துவக்க நிகழ்வுகள்</h3>
+                        <div id="tn-events" class="news-content">
+                            <p>நிகழ்வுகள் ஏற்றப்படுகின்றன...</p>
+                        </div>
+                        <button onclick="loadTNBirthdays()" class="btn-refresh">புதுப்பி</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="newspapers" class="section">
+            <div class="container">
+                <h2>தமிழ் செய்தித்தாள்கள்</h2>
+                <div class="newspaper-grid">
+                    <div class="newspaper-card">
+                        <h3>தினமணி</h3>
+                        <p>தமிழ்ச் செய்தித்தாள்</p>
+                        <a href="#" onclick="loadDinamaniNews()" class="newspaper-link">பார்க்க</a>
+                        <div id="dinamani-content" class="news-content hidden"></div>
+                    </div>
+                    <div class="newspaper-card">
+                        <h3>இந்து தமிழ்</h3>
+                        <p>The Hindu தமிழ் பதிப்பு</p>
+                        <a href="#" onclick="loadHinduNews()" class="newspaper-link">பார்க்க</a>
+                        <div id="hindu-content" class="news-content hidden"></div>
+                    </div>
+                    <div class="newspaper-card">
+                        <h3>தீனகரன்</h3>
+                        <p>குறிப்பிடத்தக்க தமிழ் செய்தித்தாள்</p>
+                        <a href="#" onclick="loadDinakaranNews()" class="newspaper-link">பார்க்க</a>
+                        <div id="dinakaran-content" class="news-content hidden"></div>
+                    </div>
+                    <div class="newspaper-card">
+                        <h3>Makkal Kural</h3>
+                        <p>மக்கள் குரல்</p>
+                        <a href="#" onclick="loadMakkalKuralNews()" class="newspaper-link">பார்க்க</a>
+                        <div id="makkalkural-content" class="news-content hidden"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 தேர்வு தயார்ப்பு வலைத்தளம். அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டுள்ளன.</p>
+            <p>தேர்வு வெற்றிக்கு உங்கள் தயார்ப்பில் வசீகரம்!</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
